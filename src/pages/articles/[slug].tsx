@@ -9,11 +9,14 @@ type Props = {
   article?: ArticleEntry
 }
 
+type UrlQuery = { slug: string }
+
 const NoContents = () => (
   <p>There is nothing we can do.</p>
 )
 
 const ArticleIdPage: NextPage<Props> = ({ article }) => {
+  console.log(article)
   return (
     <Layout>
       {article
@@ -28,14 +31,13 @@ const ArticleIdPage: NextPage<Props> = ({ article }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps<Props> = async context => {
-  const articleSlug = context.params.id
-  if (!articleSlug) return null
-
+export const getStaticProps: GetStaticProps<Props, UrlQuery> = async context => {
+  const articleSlug = context.params.slug
   // `slug` is required and unique
   const entries = await client.getEntries<ArticleEntity>({
-    'content_type': 'article',
-    'fields.slug': articleSlug as string
+    content_type: 'article',
+    'fields.slug': articleSlug,
+    limit: 1
   })
   if (!entries || entries.total < 1) return null
 

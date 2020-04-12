@@ -17,6 +17,7 @@ class Document extends NextDocument {
         <Head>
           <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="theme-color" content="#30bce7" key="themeColor" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
         </Head>
 
         <body>

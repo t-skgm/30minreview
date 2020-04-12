@@ -7,6 +7,7 @@ export type ArticleEntity = {
   postedAt: string
   catchImage?: string
   amId?: string
+  tags?: string[]
 }
 
 export type ArticleEntry = Contentful.Entry<ArticleEntity>

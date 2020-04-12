@@ -4,6 +4,7 @@ import { Article } from '@/components/molecules/article'
 import { Layout } from '@/components/organisms/Layout'
 import { client } from '@/utils/contentful'
 import { ArticleEntity, ArticleEntry } from '@/types'
+import { consts } from "@/consts"
 
 type Props = {
   articles: ArticleEntry[]
@@ -30,7 +31,11 @@ const IndexPage: NextPage<Props> = ({ articles }) => {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async context => {
-  const entries = await client.getEntries<ArticleEntity>()
+  const entries = await client.getEntries<ArticleEntity>({
+    content_type: 'article',
+    order: '-fields.postedAt',
+    limit: consts.paginate.articlesPerPage
+  })
   if (!entries || entries.total < 1) return null
 
   return {
