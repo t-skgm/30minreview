@@ -17,7 +17,6 @@ const NoContents = () => (
 const IndexPage: NextPage<Props> = ({ articles }) => {
   return (
     <Layout>
-      <p>30分でいろいろ書く。</p>
       {articles.length > 0
         ? articles.map(a => (
             <Article

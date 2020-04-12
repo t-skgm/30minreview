@@ -6,7 +6,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title key="title">{consts.siteTitle}</title>
+        <title key="title">{consts.site.title}</title>
       </Head>
       <Component {...pageProps} />
     </>
