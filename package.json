@@ -2,12 +2,15 @@
   "name": "30minreview",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLISENCED",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "contentful": "7.14.2",
+    "marked": "0.8.2",
     "next": "9.3.4",
     "react": "16.13.1",
     "react-dom": "16.13.1"
