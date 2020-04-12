@@ -16,11 +16,12 @@ const NoContents = () => (
 const IndexPage: NextPage<Props> = ({ articles }) => {
   return (
     <Layout>
+      <p>30分でいろいろ書く。</p>
       {articles.length > 0
-        ? articles.map(p => (
+        ? articles.map(a => (
             <Article
-              key={p.fields.slug}
-              article={p.fields}
+              key={a.fields.slug}
+              article={a.fields}
             />
           ))
         : <NoContents />}
@@ -30,7 +31,7 @@ const IndexPage: NextPage<Props> = ({ articles }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async context => {
   const entries = await client.getEntries<ArticleEntity>()
-  if (!entries.items) return null
+  if (!entries || entries.total < 1) return null
 
   return {
     props: {
