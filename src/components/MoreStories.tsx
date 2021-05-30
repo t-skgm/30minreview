@@ -1,6 +1,7 @@
-import PostPreview from '../components/post-preview'
+import { PostPreview } from '../components/PostPreview'
+import { PostContent } from '../lib/api'
 
-export default function MoreStories({ posts }) {
+export const MoreStories: React.VFC<{ posts: PostContent[] }> = ({ posts }) => {
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
@@ -13,9 +14,7 @@ export default function MoreStories({ posts }) {
             title={post.title}
             coverImage={post.coverImage}
             date={post.date}
-            author={post.author}
             slug={post.slug}
-            excerpt={post.excerpt}
           />
         ))}
       </div>

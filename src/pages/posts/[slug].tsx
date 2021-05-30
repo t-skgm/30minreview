@@ -1,26 +1,28 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import Container from '../../components/container'
-import PostBody from '../../components/post-body'
-import Header from '../../components/header'
-import PostHeader from '../../components/post-header'
-import { Layout } from '../../components/Layout'
-import { getPostBySlug, getAllPosts } from '../../lib/api'
-import PostTitle from '../../components/post-title'
 import Head from 'next/head'
+
 import { blogConfig } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
+import { getPostBySlug, getAllPosts, PostContent } from '../../lib/api'
+
+import { Container } from '../../components/Container'
+import { PostBody } from '../../components/PostBody'
+import { Header } from '../../components/Header'
+import { PostHeader } from '../../components/PostHeader'
+import { Layout } from '../../components/Layout'
+import { PostTitle } from '../../components/PostTitle'
 
 type Props = {
-  post: any
+  post: PostContent
   preview?: boolean
 }
 
 export const Post: React.FC<Props> = ({ post, preview }) => {
   const router = useRouter()
 
-  if (!router.isFallback && !post?.slug) {
+  if (!router.isFallback && !post.slug) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -34,16 +36,13 @@ export const Post: React.FC<Props> = ({ post, preview }) => {
           <>
             <article className="mb-32">
               <Head>
-                <title>
-                  {post.title} | {blogConfig.name}
-                </title>
-                <meta property="og:image" content={post.ogImage.url} />
+                <title>{post.title} | {blogConfig.name}</title>
+                {post.ogImage?.url && <meta property="og:image" content={post.ogImage?.url} />}
               </Head>
               <PostHeader
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
-                author={post.author}
               />
               <PostBody content={post.content} />
             </article>
@@ -56,18 +55,21 @@ export const Post: React.FC<Props> = ({ post, preview }) => {
 
 export default Post
 
-export const getStaticProps: GetStaticProps<{ post: any }, { slug: string; content: string }> = async ({ params }) => {
+type QueryProps = {
+  slug: string
+  content: string
+}
+
+export const getStaticProps: GetStaticProps<{ post: PostContent }, QueryProps> = async ({ params }) => {
   const post = getPostBySlug(params!.slug, [
     'title',
     'date',
     'slug',
-    'author',
     'content',
     'ogImage',
     'coverImage',
   ])
-  // @ts-ignore
-  const content = await markdownToHtml(post.content || '')
+  const content = await markdownToHtml(post.content)
 
   return {
     props: {
@@ -83,14 +85,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts(['slug'])
 
   return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          // @ts-ignore
-          slug: post.slug,
-        },
-      }
-    }),
+    paths: posts.map((post) => ({
+      params: {
+        slug: post.slug,
+      },
+    })),
     fallback: false,
   }
 }

@@ -7,3 +7,16 @@ export const blogConfig = {
   name: '30min review',
   ogImagePath: ''
 }
+
+export const globalNav = {
+  items: [{
+    title: '30min reviewとは',
+    path: '/about'
+  }, {
+    title: '今週のレコメンド(一覧)',
+    path: '/about'
+  }, {
+    title: 'Apple Musicプレイリスト',
+    path: '/about'
+  }]
+}

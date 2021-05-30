@@ -8,6 +8,7 @@ ogImage:
 author:
   name: ''
   picture: ''
+tags: ['BestOf', '門田匡陽']
 ---
 
 アルバム・EP・シングルを混ぜて好きな順に並べてみた。
