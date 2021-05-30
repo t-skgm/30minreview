@@ -1,6 +1,7 @@
 {
-  "name": "blog-starter",
+  "name": "30minreview-blog",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -22,6 +23,5 @@
     "postcss": "^8.2.4",
     "tailwindcss": "^2.0.2",
     "typescript": "^4.3.2"
-  },
-  "license": "MIT"
+  }
 }

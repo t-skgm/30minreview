@@ -9,7 +9,7 @@ import { Layout } from '../../components/Layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
-import { CMS_NAME } from '../../lib/constants'
+import { blogConfig } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 
 type Props = {
@@ -35,7 +35,7 @@ export const Post: React.FC<Props> = ({ post, preview }) => {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
+                  {post.title} | {blogConfig.name}
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
