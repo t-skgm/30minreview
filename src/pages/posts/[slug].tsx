@@ -1,21 +1,29 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
-import Layout from '../../components/layout'
+import { Layout } from '../../components/Layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 
-export default function Post({ post, morePosts, preview }) {
+type Props = {
+  post: any
+  preview?: boolean
+}
+
+export const Post: React.FC<Props> = ({ post, preview }) => {
   const router = useRouter()
+
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -46,8 +54,10 @@ export default function Post({ post, morePosts, preview }) {
   )
 }
 
-export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, [
+export default Post
+
+export const getStaticProps: GetStaticProps<{ post: any }, { slug: string; content: string }> = async ({ params }) => {
+  const post = getPostBySlug(params!.slug, [
     'title',
     'date',
     'slug',
@@ -56,6 +66,7 @@ export async function getStaticProps({ params }) {
     'ogImage',
     'coverImage',
   ])
+  // @ts-ignore
   const content = await markdownToHtml(post.content || '')
 
   return {
@@ -68,13 +79,14 @@ export async function getStaticProps({ params }) {
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts(['slug'])
 
   return {
     paths: posts.map((post) => {
       return {
         params: {
+          // @ts-ignore
           slug: post.slug,
         },
       }
