@@ -1,7 +1,7 @@
-import { PostPreview } from '../components/PostPreview'
-import { PostContent } from '../lib/api'
+import { PostPreview } from './Post'
+import { PostContentType } from '../lib/api'
 
-export const MoreStories: React.VFC<{ posts: PostContent[] }> = ({ posts }) => {
+export const MoreStories: React.VFC<{ posts: PostContentType[] }> = ({ posts }) => {
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
@@ -11,10 +11,7 @@ export const MoreStories: React.VFC<{ posts: PostContent[] }> = ({ posts }) => {
         {posts.map((post) => (
           <PostPreview
             key={post.slug}
-            title={post.title}
-            coverImage={post.coverImage}
-            date={post.date}
-            slug={post.slug}
+            post={post}
           />
         ))}
       </div>

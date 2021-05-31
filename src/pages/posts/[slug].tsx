@@ -5,21 +5,19 @@ import Head from 'next/head'
 
 import { blogConfig } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
-import { getPostBySlug, getAllPosts, PostContent } from '../../lib/api'
+import { getPostBySlug, getAllPosts, PostContentType } from '../../lib/api'
 
 import { Container } from '../../components/Container'
-import { PostBody } from '../../components/PostBody'
 import { Header } from '../../components/Header'
-import { PostHeader } from '../../components/PostHeader'
 import { Layout } from '../../components/Layout'
-import { PostTitle } from '../../components/PostTitle'
+import { PostContent } from '../../components/Post'
 
 type Props = {
-  post: PostContent
+  post: PostContentType
   preview?: boolean
 }
 
-export const Post: React.FC<Props> = ({ post, preview }) => {
+export const Post: React.VFC<Props> = ({ post, preview }) => {
   const router = useRouter()
 
   if (!router.isFallback && !post.slug) {
@@ -28,26 +26,14 @@ export const Post: React.FC<Props> = ({ post, preview }) => {
 
   return (
     <Layout preview={preview}>
+      <Head>
+        <title>{post.title} | {blogConfig.name}</title>
+        {post.ogImage?.url && <meta property="og:image" content={post.ogImage.url} />}
+      </Head>
+
       <Container>
         <Header />
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>{post.title} | {blogConfig.name}</title>
-                {post.ogImage?.url && <meta property="og:image" content={post.ogImage?.url} />}
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-              />
-              <PostBody content={post.content} />
-            </article>
-          </>
-        )}
+        <PostContent loading={router.isFallback} post={post} />
       </Container>
     </Layout>
   )
@@ -57,10 +43,9 @@ export default Post
 
 type QueryProps = {
   slug: string
-  content: string
 }
 
-export const getStaticProps: GetStaticProps<{ post: PostContent }, QueryProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<{ post: PostContentType }, QueryProps> = async ({ params }) => {
   const post = getPostBySlug(params!.slug, [
     'title',
     'date',
@@ -81,7 +66,7 @@ export const getStaticProps: GetStaticProps<{ post: PostContent }, QueryProps> =
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<QueryProps> = async () => {
   const posts = getAllPosts(['slug'])
 
   return {

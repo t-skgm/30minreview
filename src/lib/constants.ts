@@ -5,7 +5,8 @@ export const HOME_OG_IMAGE_URL =
 
 export const blogConfig = {
   name: '30min review',
-  ogImagePath: ''
+  ogImagePath: '',
+  twitter: 'march_am_'
 }
 
 export const globalNav = {

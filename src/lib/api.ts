@@ -9,11 +9,12 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
 }
 
-export type PostContent = {
+export type PostContentType = {
   title: string
   date: string
   slug: string
   content: string
+  excerpt?: string
   ogImage?: { url: string }
   coverImage?: string
 }
@@ -22,7 +23,7 @@ export type PostContentField = 'title' | 'slug' | 'date' | 'content' | 'ogImage'
 
 export const postContentFields: PostContentField[] = ['title', 'slug', 'date', 'content', 'ogImage', 'coverImage']
 
-export function getPostBySlug<TFields extends PostContentField>(slug: string, fields: TFields[] = []): Pick<PostContent, TFields> {
+export function getPostBySlug<TFields extends PostContentField>(slug: string, fields: TFields[] = []): Pick<PostContentType, TFields> {
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -33,7 +34,7 @@ export function getPostBySlug<TFields extends PostContentField>(slug: string, fi
     content,
     slug: realSlug,
     ...data
-  } as PostContent
+  } as PostContentType
 
   return pick(metadata, fields)
 }

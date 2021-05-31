@@ -1,7 +1,7 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { GlobalStyles } from 'twin.macro'
 
-export default class MyDocument extends Document {
+export default class Document extends NextDocument {
   render() {
     return (
       <Html lang="ja">

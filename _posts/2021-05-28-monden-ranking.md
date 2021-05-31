@@ -1,13 +1,9 @@
 ---
 title: '門田匡陽 オールタイム作品ランキング'
 excerpt: '門田匡陽 オールタイム作品ランキング'
-coverImage: '/assets/blog/preview/cover.jpg'
 date: '2021-05-28T05:35:07.322Z'
 ogImage:
   url: '/assets/blog/preview/cover.jpg'
-author:
-  name: ''
-  picture: ''
 tags: ['BestOf', '門田匡陽']
 ---
 
