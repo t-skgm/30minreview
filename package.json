@@ -1,25 +1,43 @@
 {
-  "name": "blog-starter",
+  "name": "30minreview-blog",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint --ext .ts,.tsx src/",
+    "format": "prettier -w ./src",
+    "format:check": "prettier -c \"./src/**/*.(js|jsx|ts|tsx)\""
   },
   "dependencies": {
-    "classnames": "2.2.6",
-    "date-fns": "2.16.1",
-    "gray-matter": "4.0.2",
+    "@emotion/css": "^11.1.3",
+    "@emotion/react": "^11.4.0",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "classnames": "2.3.1",
+    "date-fns": "2.22.1",
+    "gray-matter": "4.0.3",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "remark": "13.0.0",
-    "remark-html": "13.0.1"
+    "remark-html": "13.0.1",
+    "remeda": "^0.0.27"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.3.0",
+    "@types/react": "^17.0.8",
     "autoprefixer": "^10.2.1",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-react": "7.24.0",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "prettier": "2.3.0",
     "postcss": "^8.2.4",
-    "tailwindcss": "^2.0.2"
-  },
-  "license": "MIT"
+    "tailwindcss": "^2.1.2",
+    "twin.macro": "^2.4.2",
+    "typescript": "^4.3.2"
+  }
 }

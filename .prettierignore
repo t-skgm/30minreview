@@ -1,0 +1,11 @@
+/test/**/*
+/src/generated/**/*
+/src/graphql-types.ts
+.storybook/
+
+next.config.js
+generated.tsx
+apollo.config.js
+babel.config.js
+.eslintrc.js
+apollo.config.js
