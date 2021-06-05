@@ -24,22 +24,21 @@ const Index: React.VFC<Props> = ({ allPosts }) => {
       <nav className="max-w-3xl mx-auto">
         <ul className="flex space-x-4">
           {globalNav.items.map(item => (
-            <li key={item.title}><a href={item.path}>{item.title}</a></li>
+            <li key={item.title}>
+              <a href={item.path}>{item.title}</a>
+            </li>
           ))}
         </ul>
       </nav>
 
       <div>
-        {allPosts.length > 0 &&
+        {allPosts.length > 0 && (
           <div>
-            {allPosts.map((post) => (
-              <PostPreview
-                key={post.slug}
-                post={post}
-              />
+            {allPosts.map(post => (
+              <PostPreview key={post.slug} post={post} />
             ))}
           </div>
-        }
+        )}
       </div>
     </Layout>
   )
@@ -48,14 +47,9 @@ const Index: React.VFC<Props> = ({ allPosts }) => {
 export default Index
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'coverImage',
-  ])
+  const allPosts = getAllPosts(['title', 'date', 'slug', 'coverImage'])
 
   return {
-    props: { allPosts },
+    props: { allPosts }
   }
 }

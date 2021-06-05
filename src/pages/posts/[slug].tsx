@@ -27,7 +27,9 @@ export const Post: React.VFC<Props> = ({ post, preview }) => {
   return (
     <Layout preview={preview}>
       <Head>
-        <title>{post.title} | {blogConfig.name}</title>
+        <title>
+          {post.title} | {blogConfig.name}
+        </title>
         {post.ogImage?.url && <meta property="og:image" content={post.ogImage.url} />}
       </Head>
 
@@ -46,23 +48,16 @@ type QueryProps = {
 }
 
 export const getStaticProps: GetStaticProps<{ post: PostContentType }, QueryProps> = async ({ params }) => {
-  const post = getPostBySlug(params!.slug, [
-    'title',
-    'date',
-    'slug',
-    'content',
-    'ogImage',
-    'coverImage',
-  ])
+  const post = getPostBySlug(params!.slug, ['title', 'date', 'slug', 'content', 'ogImage', 'coverImage'])
   const content = await markdownToHtml(post.content)
 
   return {
     props: {
       post: {
         ...post,
-        content,
-      },
-    },
+        content
+      }
+    }
   }
 }
 
@@ -70,11 +65,11 @@ export const getStaticPaths: GetStaticPaths<QueryProps> = async () => {
   const posts = getAllPosts(['slug'])
 
   return {
-    paths: posts.map((post) => ({
+    paths: posts.map(post => ({
       params: {
-        slug: post.slug,
-      },
+        slug: post.slug
+      }
     })),
-    fallback: false,
+    fallback: false
   }
 }

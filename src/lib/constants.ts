@@ -10,14 +10,18 @@ export const blogConfig = {
 }
 
 export const globalNav = {
-  items: [{
-    title: '30min reviewとは',
-    path: '/about'
-  }, {
-    title: '今週のレコメンド(一覧)',
-    path: '/about'
-  }, {
-    title: 'Apple Musicプレイリスト',
-    path: '/about'
-  }]
+  items: [
+    {
+      title: '30min reviewとは',
+      path: '/about'
+    },
+    {
+      title: '今週のレコメンド(一覧)',
+      path: '/about'
+    },
+    {
+      title: 'Apple Musicプレイリスト',
+      path: '/about'
+    }
+  ]
 }

@@ -16,7 +16,7 @@ export const CoverImage: React.VFC<Props> = ({ title, src, href, height, width }
       src={src}
       alt={`${title}`}
       className={cn('shadow-sm', {
-        'hover:shadow-md transition-shadow duration-200': href,
+        'hover:shadow-md transition-shadow duration-200': href
       })}
       layout="responsive"
       width={width}
