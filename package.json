@@ -6,6 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "export-static": "next export",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --ext .ts,.tsx src/",
     "format": "prettier -w ./src",
