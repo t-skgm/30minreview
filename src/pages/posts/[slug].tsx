@@ -30,7 +30,7 @@ export const Post: React.VFC<Props> = ({ post, preview }) => {
         <title>
           {post.title} | {blogConfig.name}
         </title>
-        {post.ogImage?.url && <meta property="og:image" content={post.ogImage.url} />}
+        {post.coverImage && <meta property="og:image" content={post.coverImage} />}
       </Head>
 
       <Container>
@@ -48,7 +48,7 @@ type QueryProps = {
 }
 
 export const getStaticProps: GetStaticProps<{ post: PostContentType }, QueryProps> = async ({ params }) => {
-  const post = getPostBySlug(params!.slug, ['title', 'date', 'slug', 'content', 'ogImage', 'coverImage'])
+  const post = getPostBySlug(params!.slug, ['title', 'date', 'slug', 'content', 'coverImage'])
   const content = await markdownToHtml(post.content)
 
   return {

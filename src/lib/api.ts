@@ -15,13 +15,12 @@ export type PostContentType = {
   slug: string
   content: string
   excerpt?: string
-  ogImage?: { url: string }
   coverImage?: string
 }
 
-export type PostContentField = 'title' | 'slug' | 'date' | 'content' | 'ogImage' | 'coverImage'
+export type PostContentField = 'title' | 'slug' | 'date' | 'content' | 'coverImage'
 
-export const postContentFields: PostContentField[] = ['title', 'slug', 'date', 'content', 'ogImage', 'coverImage']
+export const postContentFields: PostContentField[] = ['title', 'slug', 'date', 'content', 'coverImage']
 
 export function getPostBySlug<TFields extends PostContentField>(
   slug: string,

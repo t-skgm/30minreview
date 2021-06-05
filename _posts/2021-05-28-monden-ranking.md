@@ -2,9 +2,8 @@
 title: '門田匡陽 オールタイム作品ランキング'
 excerpt: '門田匡陽 オールタイム作品ランキング'
 date: '2021-05-28T05:35:07.322Z'
-ogImage:
-  url: '/assets/blog/preview/cover.jpg'
 tags: ['BestOf', '門田匡陽']
+coverImage: '/assets/blog/preview/cover.jpg'
 ---
 
 アルバム・EP・シングルを混ぜて好きな順に並べてみた。
