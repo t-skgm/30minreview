@@ -4,9 +4,8 @@
 
 .markdown p,
 .markdown ul,
-.markdown ol,
 .markdown blockquote {
-  @apply my-6;
+  @apply my-3;
 }
 
 .markdown h2 {
@@ -15,4 +14,8 @@
 
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
+}
+
+.markdown ol {
+  @apply list-decimal pl-8 my-6;
 }
